@@ -1,15 +1,13 @@
 /*==============================================================*/
 /* DBMS name:      Microsoft SQL Server 2016                    */
-/* Created on:     1/8/2022 11:38:46 AM                         */
+/* Created on:     1/9/2022 9:24:42 PM                          */
 /*==============================================================*/
-
-use carrentaldb
 
 /*==============================================================*/
 /* Table: ACCOUNT                                               */
 /*==============================================================*/
 create table ACCOUNT (
-   CARD_NUMBER          int			         not null IDENTITY(1,1),
+   CARD_NUMBER          varchar(256)         not null,
    CT_ID                int                  not null,
    BALANCE              float                null,
    constraint PK_ACCOUNT primary key (CARD_NUMBER)
@@ -30,7 +28,7 @@ go
 /* Table: ADMINST                                               */
 /*==============================================================*/
 create table ADMINST (
-   EMP_ID               int                  not null IDENTITY(1,1),
+   EMP_ID               int                  not null,
    EMP_NAME             varchar(256)         null,
    EMP_PHONE            varchar(256)         null,
    EMP_ADDRESS          varchar(256)         null,
@@ -45,7 +43,7 @@ go
 /* Table: BRANCH                                                */
 /*==============================================================*/
 create table BRANCH (
-   LOC_ID               int                  not null IDENTITY(1,1),
+   LOC_ID               int                  not null,
    LOC_NAME             varchar(128)         null,
    LOC_EMAIL            varchar(128)         null,
    LOC_STREET           varchar(128)         null,
@@ -58,7 +56,7 @@ go
 /* Table: CAR                                                   */
 /*==============================================================*/
 create table CAR (
-   CAR_ID               int                  not null IDENTITY(1,1),
+   CAR_ID               int                  not null,
    LOC_ID               int                  not null,
    CAR_COLOR            varchar(256)         null,
    CAR_YEAR             int                  null,
@@ -85,7 +83,7 @@ go
 /* Table: CUSTOMER                                              */
 /*==============================================================*/
 create table CUSTOMER (
-   CT_ID                int                  not null IDENTITY(1,1), 
+   CT_ID                int                  not null,
    CT_FIRSTNAME         varchar(256)         null,
    CT_LASTNAME          varchar(256)         null,
    CT_ADDRESS           varchar(256)         null,
@@ -101,7 +99,7 @@ go
 /* Table: INSURANCE                                             */
 /*==============================================================*/
 create table INSURANCE (
-   INS_ID               int                  not null IDENTITY(1,1),
+   INS_ID               int                  not null,
    CAR_ID               int                  not null,
    INS_STARTING_DATE    datetime             null,
    INS_EXPIRY_DATE      datetime             null,
@@ -154,7 +152,7 @@ go
 /* Table: RENTINFO                                              */
 /*==============================================================*/
 create table RENTINFO (
-   RENT_ID              int                  not null IDENTITY(1,1),
+   RENT_ID              int                  not null,
    CT_ID                int                  not null,
    CAR_ID               int                  not null,
    NB_OF_DAYS           int                  null,
@@ -191,10 +189,11 @@ go
 /* Table: REQUEST                                               */
 /*==============================================================*/
 create table REQUEST (
-   REQID                int                  not null IDENTITY(1,1),
+   REQID                int                  not null,
    EMP_ID               int                  not null,
    RENT_ID              int                  not null,
    CT_ID                int                  not null,
+   CARD_NUMBER          varchar(256)         not null,
    REQSTATUS            varchar(30)          null,
    REQDATE              datetime             null,
    REQCONFIRMDATE       datetime             null,
@@ -232,53 +231,13 @@ go
 create nonclustered index BELONGS_FK on REQUEST (RENT_ID ASC)
 go
 
-alter table ACCOUNT
-   add constraint FK_ACCOUNT_HAVEACCOU_CUSTOMER foreign key (CT_ID)
-      references CUSTOMER (CT_ID)
-go
+/*==============================================================*/
+/* Index: REFUNDED_FK                                           */
+/*==============================================================*/
 
-alter table CAR
-   add constraint FK_CAR_LOCATED_BRANCH foreign key (LOC_ID)
-      references BRANCH (LOC_ID)
-go
 
-alter table INSURANCE
-   add constraint FK_INSURANC_COVERS_CAR foreign key (CAR_ID)
-      references CAR (CAR_ID)
-go
 
-alter table RENT
-   add constraint FK_RENT_RENT_CUSTOMER foreign key (CT_ID)
-      references CUSTOMER (CT_ID)
-go
 
-alter table RENT
-   add constraint FK_RENT_RENT2_CAR foreign key (CAR_ID)
-      references CAR (CAR_ID)
-go
-
-alter table RENTINFO
-   add constraint FK_RENTINFO_GETRENTIN_CUSTOMER foreign key (CT_ID)
-      references CUSTOMER (CT_ID)
-go
-
-alter table RENTINFO
-   add constraint FK_RENTINFO_HASRENTIN_CAR foreign key (CAR_ID)
-      references CAR (CAR_ID)
-go
-
-alter table REQUEST
-   add constraint FK_REQUEST_ASSOCIATI_CUSTOMER foreign key (CT_ID)
-      references CUSTOMER (CT_ID)
-go
-
-alter table REQUEST
-   add constraint FK_REQUEST_BELONGS_RENTINFO foreign key (RENT_ID)
-      references RENTINFO (RENT_ID)
-go
-
-alter table REQUEST
-   add constraint FK_REQUEST_HANDLE_ADMINST foreign key (EMP_ID)
-      references ADMINST (EMP_ID)
+create nonclustered index REFUNDED_FK on REQUEST (CARD_NUMBER ASC)
 go
 
