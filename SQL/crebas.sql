@@ -12,7 +12,7 @@
 /* Table: ACCOUNT                                               */
 /*==============================================================*/
 create table ACCOUNT (
-   CARD_NUMBER          varchar(256)         not null,
+   CARD_NUMBER          int			         not null IDENTITY(1,1),
    CT_ID                int                  not null,
    BALANCE              float                null,
    constraint PK_ACCOUNT primary key (CARD_NUMBER)
@@ -48,7 +48,7 @@ go
 /* Table: BRANCH                                                */
 /*==============================================================*/
 create table BRANCH (
-   LOC_ID               int                  not null,
+   LOC_ID               int                  not null IDENTITY(1,1),
    LOC_NAME             varchar(128)         null,
    LOC_EMAIL            varchar(128)         null,
    LOC_STREET           varchar(128)         null,
@@ -61,7 +61,7 @@ go
 /* Table: CAR                                                   */
 /*==============================================================*/
 create table CAR (
-   CAR_ID               int                  not null,
+   CAR_ID               int                  not null IDENTITY(1,1),
    LOC_ID               int                  not null,
    CAR_COLOR            varchar(256)         null,
    CAR_YEAR             int                  null,
@@ -88,7 +88,7 @@ go
 /* Table: CUSTOMER                                              */
 /*==============================================================*/
 create table CUSTOMER (
-   CT_ID                int                  not null,
+   CT_ID                int                  not null IDENTITY(1,1),
    CT_FIRSTNAME         varchar(256)         null,
    CT_LASTNAME          varchar(256)         null,
    CT_ADDRESS           varchar(256)         null,
@@ -104,7 +104,7 @@ go
 /* Table: INSURANCE                                             */
 /*==============================================================*/
 create table INSURANCE (
-   INS_ID               int                  not null,
+   INS_ID               int                  not null IDENTITY(1,1),
    CAR_ID               int                  not null,
    INS_STARTING_DATE    datetime             null,
    INS_EXPIRY_DATE      datetime             null,
@@ -157,7 +157,7 @@ go
 /* Table: RENTINFO                                              */
 /*==============================================================*/
 create table RENTINFO (
-   RENT_ID              int                  not null,
+   RENT_ID              int                  not null IDENTITY(1,1),
    CT_ID                int                  not null,
    CAR_ID               int                  not null,
    NB_OF_DAYS           int                  null,
@@ -194,7 +194,7 @@ go
 /* Table: REQUEST                                               */
 /*==============================================================*/
 create table REQUEST (
-   REQID                int                  not null,
+   REQID                int                  not null IDENTITY(1,1),
    EMP_ID               int                  not null,
    RENT_ID              int                  not null,
    CT_ID                int                  not null,
