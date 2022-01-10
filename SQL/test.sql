@@ -9,7 +9,7 @@
 USE carrentaldb
 
 
-SELECT * FROM UNAPPROVED_REQUESTS
+SELECT * FROM vwUnapprovedRequests
 
 /* INTENT : Initaiting a request */
 

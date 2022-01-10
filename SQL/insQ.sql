@@ -3,12 +3,12 @@
 /* INSERTING DATA INTO THE DATABASE                                      */
 /*=======================================================================*/
 
-
+use carrentaldb
 
 /*=========================== INSERTING CUSTOMERS =======================*/
 
 
-insert into customer (ct_firstname, ct_lastname, ct_address, ct_age, ct_email, ct_password)
+insert into TBLCUSTOMER(ct_firstname, ct_lastname, ct_address, ct_age, ct_email, ct_password)
 values
 ('mohammad', 'ajami', 'beirut', 22, 'mhmhajmi@gmail.com', 'mhmd123'),
 ('ali', 'younes', 'baalbck', 21, 'alyuns@gmail.com', 'alyns123'),
@@ -17,7 +17,7 @@ values
 ('bilal', 'ahmad', 'hamra', 18, 'bilal@outlook.com', 'bilal1342');
 
 
-select * from CUSTOMER
+select * from TBLCUSTOMER
 
 
 
@@ -25,41 +25,41 @@ select * from CUSTOMER
 
 
 
-insert into Branch
+insert into TBLBRANCH (LOC_NAME, LOC_EMAIL, LOC_STREET, LOC_PHONE)
 values
 ('hamra', 'firstbranch@gmail.com', 'aub street', '03 001 002'),
 ('sin el fil', 'secondbranch@gmail.com', 'conservatiour main road', '03 003 004'),
 ('beirut', 'thirdbranch@gmail.com', 'hadi nasrallah street', '03 005 006');
 
-select * from Branch
+select * from TBLBRANCH
 
 /*========================= INSERTING CARSFORRENT =========================*/
 
 
 
-insert into Car (loc_id, car_color, car_year, car_model, car_type, price_per_day)
+insert into TBLCAR (car_loc_id, car_color, car_year, car_model, car_type, car_price_per_day)
 values
-(1,'blue', 2009, 'bmw', 'jeep', 30.28),
-(1,'silver', 2020, 'bmw', 'car', 88.36),
-(2,'black', 2017, 'audi', 'car', 57.01),
-(2, 'black', 2019, 'toyota', 'car', 66.12),
-(3,'white', 2012, 'renault', 'jeep', 26.88),
-(3,'silver', 2016, 'mercedes', 'jeep', 40.58),
-(3,'yellow', 2018, 'mercedes', 'car', 44.32);
+(200,'blue', 2009, 'bmw', 'jeep', 30.28),
+(200,'silver', 2020, 'bmw', 'car', 88.36),
+(200,'black', 2017, 'audi', 'car', 57.01),
+(201, 'black', 2019, 'toyota', 'car', 66.12),
+(201,'white', 2012, 'renault', 'jeep', 26.88),
+(202,'silver', 2016, 'mercedes', 'jeep', 40.58),
+(202,'yellow', 2018, 'mercedes', 'car', 44.32);
 
-select * from Car
+select * from TBLCAR
 
 /*========================== INSERTING INTO CAR INSURANCE =========================*/
 
 
-insert into Insurance (CAR_ID, INS_STARTING_DATE, INS_EXPIRY_DATE, INS_COST)
+insert into TBLINSURANCE (INS_CAR_ID, INS_STARTING_DATE, INS_EXPIRY_DATE, INS_COST)
 values
-(1,2019-03-21, 2020-6-21, 800),
-(2,2020-07-07, 2021-07-07, 800),
-(3,2021-04-25, 2022-04-25, 750),
-(4,2020-12-06, 2021-12-06, 690);
+(100,2019-03-21, 2020-6-21, 800),
+(100,2020-07-07, 2021-07-07, 800),
+(101,2021-04-25, 2022-04-25, 750),
+(102,2020-12-06, 2021-12-06, 690);
 
-SELECT * FROM INSURANCE
+SELECT * FROM TBLINSURANCE
 
 -- TRIGGER : INSURANCE FOR CARS THAT EXIST AND DOESN'T HAVE AN ACTIVE INSURANCE
 
@@ -67,61 +67,53 @@ SELECT * FROM INSURANCE
 /*======================== INSERTING INTO ADMIN =========================*/
 
 
-insert into adminst (EMP_NAME, EMP_PHONE, EMP_ADDRESS, EMP_AGE, EMP_EMAIL, EMP_PASSWORD)
+insert into TBLADMINST (ADMIN_ID, ADMIN_EMAIL, ADMIN_PASSWORD, ADM_CARD_NB)
 values
-('maher', '71 324 435','beirut', 42, 'admin@admin.org', 'admin1234');
+(3301, 'admin@admin.org', 'adminst123', 1);
  
 
- SELECT * FROM ADMINST
+ SELECT * FROM TBLADMINST
 
  /*====================== INSERTING INTO RENT =============================*/
 
-insert into RENT
+insert into TBLRENT
 values
-(1,2),
-(1,3),
-(2,1),
-(2,2),
-(3,1),
-(4,4);
+(1,100),
+(1,101),
+(2,102),
+(2,103),
+(3,103),
+(4,101);
 
-select * from RENT
+select * from TBLRENT
 
 /*=================== INSERTING INTO RENT INFO ===========================*/
 
-insert into RENTINFO (CT_ID, CAR_ID, NB_OF_DAYS, RENTED_DAY, ARR_DATE, ARR_DUE, PENALTY, AMOUNT)
+insert into TBLRENTINFO (RI_CT_ID, RI_CAR_ID, RI_NB_OF_DAYS, RI_RENTED_DAY, RI_ARR_DATE, RI_ARR_DUE, RI_PENALTY, RI_AMOUNT)
 values
-(2, 15, '2021-3-14', '2021-3-31', '2021-3-29', 20, 440.45);
+(1, 100, 15,'2021-3-14', '2021-3-31', '2021-3-29', 20, 440.45);
 
-select * from RENTINFO
-
-
-/*=================== INSERTING INTO REQUEST INFO ========================*/
-
-
-insert into REQUEST (EMP_ID, RENT_ID, CT_ID, REQSTATUS, REQDATE)
-values
-(1, 2, 1, 1, '2022-1-3 00:00:00'), 
-(1, 2, 1, 0, '2021-7-21 12:33:44'),
-(1, 2, 1, 0, '2021-2-13 12:33:44'),
-(1, 2, 1, 0, '2021-3-6 12:33:44'),
-(1, 3, 1, 0, '2021-11-13 12:33:44'),
-(1, 3, 2, 0, '2021-12-21 12:33:44'),
-(1, 4, 3, 0, '2021-7-4 12:33:44'),
-(1, 4, 3, 0, '2021-5-5 12:33:44');
-
-SELECT * FROM REQUEST
-
+select * from TBLRENTINFO
 
 
 
 /*======================= INSERTING INTO ACCOUNT ========================*/
 
+insert into TBLACCOUNT (AC_CT_ID, AC_BALANCE)
+values
+(1, 347.3);
+
+SELECT * FROM TBLACCOUNT
+
+/*=================== INSERTING INTO REQUEST INFO ========================*/
 
 
--- insert into Account
--- values ...
--- either inherit admin from customer
+insert into TBLREQUEST (REQ_RI_RENT_ID, REQ_CT_ID, REQ_AC_CARD_NUMBER, REQ_STATUS, REQ_DATE)
+values
+(2, 1, 1, 1,'2022-1-3 00:00:00');
+
+SELECT * FROM TBLREQUEST
+
 
 
 

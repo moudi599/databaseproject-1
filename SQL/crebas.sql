@@ -1,21 +1,20 @@
 /*==============================================================*/
 /* DBMS name:      Microsoft SQL Server 2016                    */
-/* Created on:     1/9/2022 9:50:45 PM                          */
+/* Created on:     1/10/2022 9:27:10 AM                         */
 /*==============================================================*/
 
 
 
-
-
+use carrentaldb
 
 /*==============================================================*/
-/* Table: ACCOUNT                                               */
+/* Table: TBLACCOUNT                                            */
 /*==============================================================*/
-create table ACCOUNT (
-   CARD_NUMBER          int			         not null IDENTITY(1,1),
-   CT_ID                int                  not null,
-   BALANCE              float                null,
-   constraint PK_ACCOUNT primary key (CARD_NUMBER)
+create table TBLACCOUNT (
+   AC_CARD_NUMBER       int                  not null IDENTITY(1,1),
+   AC_CT_ID             int	                 not null,
+   AC_BALANCE           float                null,
+   constraint PK_TBLACCOUNT primary key (AC_CARD_NUMBER)
 )
 go
 
@@ -26,51 +25,48 @@ go
 
 
 
-create nonclustered index HAVEACCOUNT_FK on ACCOUNT (CT_ID ASC)
+create nonclustered index HAVEACCOUNT_FK on TBLACCOUNT (AC_CT_ID ASC)
 go
 
 /*==============================================================*/
-/* Table: ADMINST                                               */
+/* Table: TBLADMINST                                            */
 /*==============================================================*/
-create table ADMINST (
-   EMP_ID               int                  not null,
-   EMP_NAME             varchar(256)         null,
-   EMP_PHONE            varchar(256)         null,
-   EMP_ADDRESS          varchar(256)         null,
-   EMP_AGE              int                  null,
-   EMP_EMAIL            varchar(256)         null,
-   EMP_PASSWORD         varchar(256)         null,
-   constraint PK_ADMINST primary key (EMP_ID)
+create table TBLADMINST (
+   ADMIN_ID             int                  not null,
+   ADMIN_EMAIL          varchar(256)         null,
+   ADMIN_PASSWORD       varchar(256)         null,
+   ADM_CARD_NB          int                  null,
+   constraint PK_TBLADMINST primary key (ADMIN_ID)
 )
 go
 
 /*==============================================================*/
-/* Table: BRANCH                                                */
+/* Table: TBLBRANCH                                             */
 /*==============================================================*/
-create table BRANCH (
-   LOC_ID               int                  not null IDENTITY(1,1),
+create table TBLBRANCH (
+   LOC_ID               int                  not null IDENTITY(200,1),
    LOC_NAME             varchar(128)         null,
    LOC_EMAIL            varchar(128)         null,
    LOC_STREET           varchar(128)         null,
    LOC_PHONE            varchar(128)         null,
-   constraint PK_BRANCH primary key (LOC_ID)
+   constraint PK_TBLBRANCH primary key (LOC_ID)
 )
 go
 
 /*==============================================================*/
-/* Table: CAR                                                   */
+/* Table: TBLCAR                                                */
 /*==============================================================*/
-create table CAR (
-   CAR_ID               int                  not null IDENTITY(1,1),
-   LOC_ID               int                  not null,
+create table TBLCAR (
+   CAR_ID               int                  not null	IDENTITY(100,1),
+   CAR_LOC_ID           int                  not null,
    CAR_COLOR            varchar(256)         null,
    CAR_YEAR             int                  null,
    CAR_MODEL            varchar(256)         null,
    CAR_TYPE             varchar(256)         null,
-   RENTED_STATUS        bit                  null,
-   PRICE_PER_DAY        float                null,
-   RC_PENALTY_PER_DAY   float                null,
-   constraint PK_CAR primary key (CAR_ID)
+   CAR_RENTED_STATUS    bit                  null,
+   CAR_PRICE_PER_DAY    float                null,
+   CAR_PENALTY_PER_DAY  float                null,
+   constraint PK_TBLCAR primary key (CAR_ID)
 )
 go
 
@@ -81,13 +77,13 @@ go
 
 
 
-create nonclustered index LOCATED_FK on CAR (LOC_ID ASC)
+create nonclustered index LOCATED_FK on TBLCAR (CAR_LOC_ID ASC)
 go
 
 /*==============================================================*/
-/* Table: CUSTOMER                                              */
+/* Table: TBLCUSTOMER                                           */
 /*==============================================================*/
-create table CUSTOMER (
+create table TBLCUSTOMER (
    CT_ID                int                  not null IDENTITY(1,1),
    CT_FIRSTNAME         varchar(256)         null,
    CT_LASTNAME          varchar(256)         null,
@@ -96,20 +92,20 @@ create table CUSTOMER (
    CT_EMAIL             varchar(256)         null,
    CT_PASSWORD          varchar(256)         null,
    CT_PREMUIM           bit                  null,
-   constraint PK_CUSTOMER primary key (CT_ID)
+   constraint PK_TBLCUSTOMER primary key (CT_ID)
 )
 go
 
 /*==============================================================*/
-/* Table: INSURANCE                                             */
+/* Table: TBLINSURANCE                                          */
 /*==============================================================*/
-create table INSURANCE (
-   INS_ID               int                  not null IDENTITY(1,1),
-   CAR_ID               int                  not null,
+create table TBLINSURANCE (
+   INS_ID               int                  not null IDENTITY(200,1),
+   INS_CAR_ID           int                  not null,
    INS_STARTING_DATE    datetime             null,
    INS_EXPIRY_DATE      datetime             null,
    INS_COST             float                null,
-   constraint PK_INSURANCE primary key (INS_ID)
+   constraint PK_TBLINSURANCE primary key (INS_ID)
 )
 go
 
@@ -120,16 +116,16 @@ go
 
 
 
-create nonclustered index COVERS_FK on INSURANCE (CAR_ID ASC)
+create nonclustered index COVERS_FK on TBLINSURANCE (INS_CAR_ID ASC)
 go
 
 /*==============================================================*/
-/* Table: RENT                                                  */
+/* Table: TBLRENT                                               */
 /*==============================================================*/
-create table RENT (
-   CT_ID                int                  not null,
-   CAR_ID               int                  not null,
-   constraint PK_RENT primary key (CT_ID, CAR_ID)
+create table TBLRENT (
+   RT_CT_ID                int                  not null,
+   RT_CAR_ID               int                  not null,
+   constraint PK_TBLRENT primary key (RT_CT_ID, RT_CAR_ID)
 )
 go
 
@@ -140,7 +136,7 @@ go
 
 
 
-create nonclustered index RENT_FK on RENT (CT_ID ASC)
+create nonclustered index RENT_FK on TBLRENT (RT_CT_ID ASC)
 go
 
 /*==============================================================*/
@@ -150,23 +146,23 @@ go
 
 
 
-create nonclustered index RENT2_FK on RENT (CAR_ID ASC)
+create nonclustered index RENT2_FK on TBLRENT (RT_CAR_ID ASC)
 go
 
 /*==============================================================*/
-/* Table: RENTINFO                                              */
+/* Table: TBLRENTINFO                                           */
 /*==============================================================*/
-create table RENTINFO (
-   RENT_ID              int                  not null IDENTITY(1,1),
-   CT_ID                int                  not null,
-   CAR_ID               int                  not null,
-   NB_OF_DAYS           int                  null,
-   RENTED_DAY           datetime             null,
-   ARR_DATE             datetime             null,
-   ARR_DUE              datetime             null,
-   PENALTY              float                null,
-   AMOUNT               float                null,
-   constraint PK_RENTINFO primary key (RENT_ID)
+create table TBLRENTINFO (
+   RI_RENT_ID           int                  not null IDENTITY(1,1),
+   RI_CT_ID             int                  not null,
+   RI_CAR_ID            int                  not null,
+   RI_NB_OF_DAYS        int                  null,
+   RI_RENTED_DAY        datetime             null,
+   RI_ARR_DATE          datetime             null,
+   RI_ARR_DUE           datetime             null,
+   RI_PENALTY           float                null,
+   RI_AMOUNT            float                null,
+   constraint PK_TBLRENTINFO primary key (RI_RENT_ID)
 )
 go
 
@@ -177,7 +173,7 @@ go
 
 
 
-create nonclustered index HASRENTINFO_FK on RENTINFO (CAR_ID ASC)
+create nonclustered index HASRENTINFO_FK on TBLRENTINFO (RI_CAR_ID ASC)
 go
 
 /*==============================================================*/
@@ -187,22 +183,21 @@ go
 
 
 
-create nonclustered index GETRENTINFO_FK on RENTINFO (CT_ID ASC)
+create nonclustered index GETRENTINFO_FK on TBLRENTINFO (RI_CT_ID ASC)
 go
 
 /*==============================================================*/
-/* Table: REQUEST                                               */
+/* Table: TBLREQUEST                                            */
 /*==============================================================*/
-create table REQUEST (
-   REQID                int                  not null IDENTITY(1,1),
-   EMP_ID               int                  not null,
-   RENT_ID              int                  not null,
-   CT_ID                int                  not null,
-   CARD_NUMBER          varchar(256)         not null,
-   REQSTATUS            varchar(30)          null,
-   REQDATE              datetime             null,
-   REQCONFIRMDATE       datetime             null,
-   constraint PK_REQUEST primary key (REQID)
+create table TBLREQUEST (
+   REQ_ID               int                  not null IDENTITY(1,1),
+   REQ_RI_RENT_ID       int                  not null,
+   REQ_CT_ID            int                  not null,
+   REQ_AC_CARD_NUMBER   int                  not null,
+   REQ_STATUS           varchar(256)         null,
+   REQ_DATE             datetime             null,
+   REQ_CONFIRMDATE      datetime             null,
+   constraint PK_TBLREQUEST primary key (REQ_ID)
 )
 go
 
@@ -213,17 +208,7 @@ go
 
 
 
-create nonclustered index ASSOCIATION_22_FK on REQUEST (CT_ID ASC)
-go
-
-/*==============================================================*/
-/* Index: HANDLE_FK                                             */
-/*==============================================================*/
-
-
-
-
-create nonclustered index HANDLE_FK on REQUEST (EMP_ID ASC)
+create nonclustered index ASSOCIATION_22_FK on TBLREQUEST (REQ_CT_ID ASC)
 go
 
 /*==============================================================*/
@@ -233,7 +218,7 @@ go
 
 
 
-create nonclustered index BELONGS_FK on REQUEST (RENT_ID ASC)
+create nonclustered index BELONGS_FK on TBLREQUEST (REQ_RI_RENT_ID ASC)
 go
 
 /*==============================================================*/
@@ -243,6 +228,56 @@ go
 
 
 
-create nonclustered index REFUNDED_FK on REQUEST (CARD_NUMBER ASC)
+create nonclustered index REFUNDED_FK on TBLREQUEST (REQ_AC_CARD_NUMBER ASC)
+go
+
+alter table TBLACCOUNT
+   add constraint FK_TBLACCOU_HAVEACCOU_TBLCUSTO foreign key (AC_CT_ID)
+      references TBLCUSTOMER (CT_ID)
+go
+
+alter table TBLCAR
+   add constraint FK_TBLCAR_LOCATED_TBLBRANC foreign key (CAR_LOC_ID)
+      references TBLBRANCH (LOC_ID)
+go
+
+alter table TBLINSURANCE
+   add constraint FK_TBLINSUR_COVERS_TBLCAR foreign key (INS_CAR_ID)
+      references TBLCAR (CAR_ID)
+go
+
+alter table TBLRENT
+   add constraint FK_TBLRENT_RENT_TBLCUSTO foreign key (RT_CT_ID)
+      references TBLCUSTOMER (CT_ID)
+go
+
+alter table TBLRENT
+   add constraint FK_TBLRENT_RENT2_TBLCAR foreign key (RT_CAR_ID)
+      references TBLCAR (CAR_ID)
+go
+
+alter table TBLRENTINFO
+   add constraint FK_TBLRENTI_GETRENTIN_TBLCUSTO foreign key (RI_CT_ID)
+      references TBLCUSTOMER (CT_ID)
+go
+
+alter table TBLRENTINFO
+   add constraint FK_TBLRENTI_HASRENTIN_TBLCAR foreign key (RI_CAR_ID)
+      references TBLCAR (CAR_ID)
+go
+
+alter table TBLREQUEST
+   add constraint FK_TBLREQUE_ASSOCIATI_TBLCUSTO foreign key (REQ_CT_ID)
+      references TBLCUSTOMER (CT_ID)
+go
+
+alter table TBLREQUEST
+   add constraint FK_TBLREQUE_BELONGS_TBLRENTI foreign key (REQ_RI_RENT_ID)
+      references TBLRENTINFO (RI_RENT_ID)
+go
+
+alter table TBLREQUEST
+   add constraint FK_TBLREQUE_REFUNDED_TBLACCOU foreign key (REQ_AC_CARD_NUMBER)
+      references TBLACCOUNT (AC_CARD_NUMBER)
 go
 

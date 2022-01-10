@@ -18,18 +18,18 @@ USE carrentaldb
 
 GO
 CREATE TRIGGER trRentInfoInsert
-ON RENTINFO FOR INSERT
+ON TBLRENTINFO FOR INSERT
 AS
 BEGIN
 	DECLARE @CtId int, @CrId int
 	
-	IF ( exists (SELECT * FROM inserted as ins, CUSTOMER as ct
-				WHERE ins.CT_ID = ct.CT_ID) )
+	IF ( exists (SELECT * FROM inserted as ins, TBLCUSTOMER as ct
+				WHERE ins.RI_CT_ID = ct.CT_ID) )
 		BEGIN
 			PRINT '+++ Found match in Customer table +++'
 
-			IF ( exists (SELECT * from inserted as ins, CAR as cr
-						WHERE ins.CAR_ID = cr.CAR_ID) )
+			IF ( exists (SELECT * from inserted as ins, TBLCAR as cr
+						WHERE ins.RI_CAR_ID = cr.CAR_ID) )
 				BEGIN
 					PRINT '+++ Found match in Car table +++'
 					PRINT 'Insertion completed with no errors'
