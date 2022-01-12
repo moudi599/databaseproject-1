@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.taxiandrentapp.sign_up_user_Controller">
+   <children>
+      <Text layoutX="99.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="firstname" />
+      <Button fx:id="btnconfirm" layoutX="376.0" layoutY="331.0" mnemonicParsing="false" onAction="#ConfirmSignup" text="Confirm" />
+      <TextField fx:id="txtfirstname" layoutX="176.0" layoutY="46.0" />
+      <Text layoutX="99.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="password" />
+      <Text layoutX="100.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="lastname" />
+      <Text layoutX="128.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="age" />
+      <Text layoutX="124.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="email" />
+      <Text layoutX="109.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="address" />
+      <TextField fx:id="txtlastname" layoutX="176.0" layoutY="92.0" />
+      <TextField fx:id="txtage" layoutX="177.0" layoutY="134.0" />
+      <TextField fx:id="txtemail" layoutX="176.0" layoutY="232.0" />
+      <TextField fx:id="txtaddress" layoutX="177.0" layoutY="183.0" />
+      <PasswordField fx:id="txtpassword" layoutX="177.0" layoutY="283.0" />
+      <Label fx:id="info" layoutX="350.0" layoutY="286.0" prefHeight="18.0" prefWidth="225.0" />
+   </children>
+</AnchorPane>

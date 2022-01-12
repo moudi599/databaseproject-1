@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="915.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView layoutX="3.0" layoutY="6.0" prefHeight="243.0" prefWidth="903.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
+        </columns>
+      </TableView>
+      <TextField layoutX="14.0" layoutY="411.0" promptText="Card Number" />
+      <TextField layoutX="14.0" layoutY="285.0" promptText="Car ID" />
+      <TextField layoutX="14.0" layoutY="319.0" promptText="Number of Days" />
+      <Button layoutX="14.0" layoutY="353.0" mnemonicParsing="false" text="View Reciept" />
+      <TextField layoutX="190.0" layoutY="286.0" prefHeight="60.0" prefWidth="149.0" />
+      <Button layoutX="14.0" layoutY="448.0" mnemonicParsing="false" text="Pay" />
+      <TextField layoutX="14.0" layoutY="536.0" promptText="RentInfo ID" />
+      <TextField layoutX="14.0" layoutY="499.0" promptText="Email" />
+      <Button layoutX="19.0" layoutY="614.0" mnemonicParsing="false" text="Request" />
+      <TextField layoutX="14.0" layoutY="576.0" promptText="Crad Number" />
+      <Button layoutX="821.0" layoutY="366.0" mnemonicParsing="false" text="View All Cars" />
+      <Button layoutX="757.0" layoutY="366.0" mnemonicParsing="false" text="Search" />
+      <TextField layoutX="592.0" layoutY="290.0" promptText="Color" />
+      <TextField layoutX="757.0" layoutY="290.0" promptText="Year" />
+      <TextField layoutX="592.0" layoutY="327.0" promptText="Model" />
+      <TextField layoutX="757.0" layoutY="327.0" promptText="Type" />
+      <CheckBox layoutX="190.0" layoutY="580.0" mnemonicParsing="false" text="Specify Card" />
+      <Button layoutX="592.0" layoutY="416.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="149.0" text="View Rents" />
+      <Button layoutX="752.0" layoutY="416.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="149.0" text="My Cards" />
+      <TableView layoutX="592.0" layoutY="461.0" prefHeight="200.0" prefWidth="323.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
+        </columns>
+      </TableView>
+      <Button layoutX="351.0" layoutY="614.0" mnemonicParsing="false" text="Button" />
+      <TextField layoutX="351.0" layoutY="576.0" promptText="RentInfo ID" />
+      <Label layoutX="419.0" layoutY="618.0" prefHeight="17.0" prefWidth="114.0" text="days left / penalty" />
+      <TextField layoutX="592.0" layoutY="366.0" promptText="Location" />
+   </children>
+</Pane>
